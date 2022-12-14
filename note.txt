@@ -1,0 +1,379 @@
+https://www.youtube.com/watch?v=tvdFYmJEaw4&list=PLB_Wd4-5SGAYsxD4JGaVdXll3PnoyI-AM&index=1
+
+
+
+#02 Mern Stack Project | Ecommerce Website | Flipkart Clone User And Admin Rest Api - 02
+npm init
+npm install --save express express-validator mongoose
+npm install --save dotenv       //เมื่อใช้ .env
+npm install --save body-parser  //เมื่อมีการส่งข้อมูล post
+npm install --save-dev nodemon  //ใช้ run server แบบ auto ผ่าน npm start
+npm install --save bcrypt       //ใช้ทำรหัส password
+สร้างไฟล์ src/index.server.js
+สร้างไฟล์ .env
+node src/index.server.js หรือ 
+npm start
+
+
+-connect mongoose
+const mongoose = require('mongoose');
+mongoose.connect(process.env.MONGODB_URL, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(function() {
+    console.log(`Database connected to ${process.env.MONGODB_URL}`);
+});
+
+-route
+สร้างโฟลเดอร์ routes
+สร้างไฟล์ auth.js route signup แล้วอ้างอิงใน index.server.js
+
+-model
+สร้างโฟลเดอร์ models
+สร้างไฟล์ user.js
+
+-controllers
+สร้างโฟลเดอร์ controllers
+สร้างไฟล์ user.js method signup
+
+#03 Mern Stack Project | Ecommerce Flipkart Clone | Admin Login Rest Api - 03
+npm install --save jsonwebtoken
+-route
+signin
+-controllers
+signin
+
+#04 Mern Stack Project | Ecommerce Website | Admin App Layout Setup - 04
+npx create-react-app admin-app  // admin dashboard
+npx create-react-app user-app   // ecommerce front shop
+npm install react-bootstrap bootstrap --save
+npm install react-router react-router-dom --save
+npm install redux react-redux redux-thunk axios --save 
+npm start
+
+admin-app/src/app.js  //กำหนด route ของ app
+สร้างโฟลเดอร์
+admin-app/src/components  //กำหนด components เช่น Header,Layout,UI/Input
+admin-app/src/containers  //กำหนด containers เช่น Home,Signin,Signup
+
+#05 Mern Stack Project | Ecommerce Website | Api Request Validation
+npm install express-validator --save
+
+สร้างโฟลเดอร์
+src/validators/auth.js  //กำหนด validateSignupRequest, validateSigninRequest, isRequestValidated
+
+กำหนด validator ให้กับ miderware กับไฟล์ต่อไปนี้เพื่อตรวจสอบ Input Request
+routes/auth.js
+routes/admin/auth.js
+
+#06 Mern Stack Project | Ecommerce Website | Categories and Sub Categories Rest Api
+npm install slugify --save
+
+สร้างไฟล์
+-src/index.server.js   // เพิ่ม categoryRoutes เข้ามา
+-src/routes/category.js
+-src/models/category.js
+-src/controllers/category.js
+
+#07 MERN Stack Project | Ecommerce Website | Product Creation Api - 07
+npm install multer --save
+npm install shortid --save
+
+สร้างไฟล์
+-src/index.server.js   // เพิ่ม productRoutes เข้ามา
+-src/routes/product.js
+-src/models/product.js
+-src/controllers/product.js
+
+#08 MERN Stack Project | Ecommerce Website | Add product to cart api - 08
+#09 MERN Stack Project | Ecommerce Website | Fix Cart Api & Update Category Api - 09
+สร้างไฟล์
+-src/index.server.js   // เพิ่ม cartRoutes เข้ามา
+-src/routes/cart.js
+-src/models/cart.js
+-src/controllers/cart.js
+
+https://www.youtube.com/watch?v=58gAQnU2FTs
+
+
+#10 MERN Stack Project | Ecommerce Website | Admin Redux Store Setup
+npm install redux react-redux redux-thunk --save
+
+-ส่งข้อมูลจาก containers signin เข้าเก็บใน Store
+สร้างโฟลเดอร์
+-admin-app/src/actions
+index.js // export actions ทั้งหมด
+constants.js // export constants ซึ่งจะใช้เป็นค่า type ที่ใช้อ้างอิงใน reducers
+auth.action.js // export actions เช่น login ซึ่งจะส่งกลับ dispatch ที่ใช้ส่งข้อมูลไปอ้างอิงใน reducers เพื่อเก็บข้อมูลใน store
+-admin-app/src/store
+index.js // สร้าง store และ นำเข้าเพื่ออ้างอิง reducers
+-admin-app/src/reducers
+index.js // ลงทะเบียน reducers เช่น auth: authReducer เพื่ออ้างอิงเรียกใช้
+auth.reducers.js // ตรวจสอบ dispatch ที่ส่งมาว่าเป็น type อะไร แล้วทำการเก็บข้อมูลเข้า store 
+
+#11 MERN Stack Project | Ecommerce Website | Admin Login & Private Route - 11
+npm install axios --save  //เพื่อนส่งข้อมูลจาก react ไปยัง server node
+npm install cors --save   //เพื่อส่งข้อมูลข้าม platform (Cross-Origin Resource Sharing) ในที่นี้ จาก port:4000(react) กับ port:2000(node)
+
+ที่ console
+window.store.getState()
+window.localStorage.clear()
+window.localStorage.getItem('token')
+
+สร้างโฟลเดอร์
+-admin-app/src/helpers
+axios.js
+
+สร้างไฟล์
+src/actions/auth.actions.js  // สร้างฟังก์ชั่น login, isUserLoggedIn
+function login
+-ส่ง dispatch LOGIN_REQUEST
+-ส่ง request api '/admin/signin' ไปยัง node
+-ตรวจสอบ response 
+ถ้า status = 200 เก็บ localStorage token, user และส่ง dispatch LOGIN_SUCCESS
+ถ้า status = 400 ส่ง dispatch LOGIN_FAILURE
+function isUserLoggedIn
+กำหนด token จาก localStorage และตรวจสอบค่า token
+ถ้ามีค่า token เก็บ ส่ง dispatch LOGIN_SUCCESS
+ถ้าไม่มีค่า token ส่ง dispatch LOGIN_FAILURE
+
+src/App.js สร้างส่วน PrivateRoute
+src/components/HOC/PrivateRoute.js  // ให้ตรวจสอบ token ใน localStorage ถ้ามีค่าให้ส่งกับ components ที่กำหนดไว้ใน app.js ถ้าไม่มีค่า token ให้ส่งกับ component Navigate ที่ link ไปยัง '/signin'
+
+
+#12 MERN Stack Project | Ecommerce Website | Admin Signout and Signup - 12
+src/App.js สร้างส่วน useEffect ตรวจสอบการ login ของ app
+src/actions/auth.action.js สร้างฟังก์ชั่น logout
+src/components/Header/index.js สร้างลิงค์ logout แล้วเรียก action logout
+
+สร้างไฟล์
+src/actions/user.actions.js  // สร้างฟังก์ชั่น register
+src/reducers/user.reducers.js  // กำหนด state ตาม type ที่ dispatch
+src/containers/Signup/index.js  // กำหนด submit form ให้ dispatech action register
+
+
+#13 MERN Stack Project | Ecommerce Website | Signout Api & Admin Dashboard - 13
+src/controllers/admin/auth.js  // สร้างฟังก์ชั่น signout
+src/routes/admin/auth.js   // สร้าง api signout
+
+src/actions/auth.actions.js  // แก้ไขฟังก์ชั่น logout ให้ส่ง api ไป signout
+
+src/App.js // เพิ่ม route Products, Orders
+src/components/Layout/index.js // แก้ไขให้มีส่วน sidebar
+src/containers/Home/index.js // ย้ายส่วน sidebar ออกเพราะอยู่ใน Layout แล้ว
+src/containers/Products/index.js // สร้างหน้า page Products
+src/containers/Orders/index.js // สร้างหน้า page Orders
+
+#14 MERN Stack Project | Ecommerce Website | Show and Add Categories - 14
+src/App.js // เพิ่ม route Category
+src/containers/Category/index.js  // สร้างหน้า page Category
+src/actions/category.actions.js  // สร้างฟังก์ชั่น getAllCategory, addCategory
+src/reducers/category.reducers.js  // กำหนด state ตาม type ที่ dispatch
+
+
+#15 MERN Stack Project | Ecommerce Website | Fix Categories & Add Product - 15
+src/App.js // เพิ่ม route Product
+src/containers/Product/index.js  // สร้างหน้า page Product
+src/actions/product.actions.js  // สร้างฟังก์ชั่น getAllProduct, addProduct
+src/reducers/product.reducers.js  // กำหนด state ตาม type ที่ dispatch
+
+#16 MERN Stack Project | Ecommerce Website | Categories and Product display - 16
+-ย้าย dispatch getAllCategory จาก useEffect หน้า page Category มาไว้ที่ App.js เพื่อให้ dispatch ตลอดเมื่อมีการทำ refreash
+-ทำ table แสดงข้อมูล หน้า page Category หน้า page Product
+สร้างไฟล์
+-src/controllers/admin/initialData.js  // เพื่อส่งข้อมูลเมื่อมีการร้องข้อ 
+-src/routes/admin/initialData.js  // route ทาง server
+-src/actions/initialData.actions.js // สร้างฟังก์ชั่น getInitailData เพื่อข้อมูล categories และ products เพื่อมาแสดงในตาราง
+-src/reducers/initialData.red/js  // กำหนด state ตาม type ที่ dispatch 
+-App.js จาก useEffect ให้ dispatch getInitailData แทน getAllCategory เพื่อทำการข้อข้อมูล categories และ products พร้อมกัน
+
+#17 MERN Stack Project | Ecommerce Website | Improvement & Product Details - 17
+-src/containers/Products/index.js  // เพิ่มส่วน product detail modal เพื่อแสดงรายละเอียด product เมื่อมีการคลิกที่แถวข้อมูล
+
+#18 MERN Stack Project | Ecommerce Website | Flipkart Categories Dropdown - 18
+npx create-react-app user-app   // ecommerce front shop
+npm install react-bootstrap bootstrap --save
+npm install react-router react-router-dom --save
+npm install redux react-redux redux-thunk axios --save 
+npm start
+
+-user-app/package.json
+"scripts": {
+  ...
+  "start": "set PORT=3000 && react-scripts start",
+}
+
+-user-app/src/index.js // กำหนด Provider, Router, store
+-user-app/src/App.js // กำหนด Routes, Route
+-user-app/src/containers/Home/index.js //ทำ page Home
+-user-app/src/components/Header/index.js //ทำส่วน Header
+-user-app/src/components/MenuHeader/index.js //ทำส่วน Menu Header
+
+#19 MERN Stack Project | Ecommerce Website | fetch product api and render product list - 19
+
+-src/routes/product.js // สร้าง route '/product/:slug'
+-src/controllers/product.js  // สร้างฟังก์ชั่น getProductBySlug เพื่อส่ง product ตาม slug และแยก product นั้นตามราคา under5k,under10k,under15k,under20k,upper20k
+
+-user-app/App.js  // สร้าง Route, PrivateRoute
+-user-app/src/containers/Home/index.js //ทำ page Home
+-user-app/src/containers/ProductList/index.js //ทำ page ProductList
+-user-app/src/components/Layout/index.js //ทำ Layout เรียก Header, MenuHeader และ กำหนด props.children เมื่อมีการเรียกใช้ Layout Component
+-user-app/src/actions/product.actions.js  // ขอข้อมูล api `/products/${slug}`
+
+
+#20 MERN Stack Project | Ecommerce Website | Admin Category Update - 20
+npm install react-checkbox-tree --save
+npm install react-icons --save
+
+-admin-app/src/containers/Category.js // แสดง category checkbox tree เพื่อเลือกที่จะแก้ไข  และทำ Edit Category Modal เพื่อแก้ไข category ที่เลือก
+
+#21 MERN Stack Project | Ecommerce Website | Edit Categories Api - 21
+
+-src/routes/category.js  // สร้าง router '/category/update'
+-src/controllers/category.js  // สร้างฟังก์ชั่น updateCategories
+-admin-app/containers/Category/index.js  // เมื่อมีการ update category จาก UpdateCategoriesModel ให้ dispatch updatedCategories(form) และตรวจสอบค่า return เพื่อ dispatch getAllCategory เพื่อปรับปรุงข้อมูลที่ได้ update ไปแล้ว
+
+#22 MERN Stack Project | Ecommerce Website | Delete Categories - 22
+-admin-app/containers/Category/index.js // สร้าง delete category modal เมื่อมีการลบข้อมูลให้ dispatch deleteCategories(ids) และตรวจสอบค่า return เพื่อ dispatch getAllCategory เพื่อปรับปรุงข้อมูลที่ได้ delete ไปแล้ว
+-src/routes/category.js  // สร้าง router '/category/delete'
+-src/controllers/category.js  // สร้างฟังก์ชั่น deleteCategories
+
+#24 MERN Stack Project | Ecommerce Website | Fix JWT Expire login issue
+-admin-app/src/helpers/axios.js // ให้สร้าง interceptors 
+ตรวจสอบ req ถ้ามี state auth token ให้ส่งไปพร้อม headers Authorization โดยอัตโนมัติ
+ตรวจสอบ res ถ้ามี error ให้ตรวจสอบว่าเป็น status 500 แสดงว่ามี token expire ให้ทำการ clear localStorage และ dispatch type LOGOUT_SUCCESS
+
+#25 MERN Stack Project | Ecommerce Website | Fix Categories Delete & UI Update - 24
+-admin-app/containers/Category/index.js // แยก components เพื่อใช้ใน page ต่อไปนี้
+-admin-app/containers/Category/components/AddCategoryModal.js
+-admin-app/containers/Category/components/UpdateCategoryModal.js
+-admin-app/containers/Category/components/DeleteCategoryModal.js
+
+#26 MERN Stack Project | Ecommerce Website | Redux dev tools and actions
+npm install --save @redux-devtools/extension
+
+admin-app/src/store/index.js เพิ่ม
+import { composeWithDevTools } from '@redux-devtools/extension';
+const store = createStore(
+  reducer,
+  composeWithDevTools(
+    applyMiddleware(...middleware)
+    // other store enhancers if any
+  )
+);
+
+#27 MERN Stack Project | Ecommerce Website | Admin Product Page
+
+admin-app/scr/App.js  // สร้าง route path '/page'
+admin-app/scr/components/Layout/index.js  // sidebar สร้าง link ไปยัง NewPage
+admin-app/scr/containers/NewPage/index.js  // สร้างหน้า NewPage
+
+
+#28 MERN Stack Project | Ecommerce Website | Create Page API
+#29 MERN Stack Project | Ecommerce Website | Admin App Fix & Update
+
+scr/models/page.js  // สร้างตาราง page
+scr/routes/admin/page.js  // สร้าง route '/page/create'
+scr/controllers/admin/page.js  // สร้างฟังก์ชั่น createPage
+admin-app/scr/containers/NewPage/index.js  // สร้าง submitCreatePageForm บันทึกลงตาราง page
+
+#30 MERN Stack Project | Ecommerce Website | Product Page - 29
+user-app
+npm install react-responsive-carousel --save
+npm install react-bootstrap bootstrap --save
+
+user-app/containers/ProductList/index.js // เลือกว่าจะแสดงสินค้าแบบไหน
+user-app/containers/ProductList/ProductStore/index.js // แสดงสินค้าแบบ store
+user-app/containers/ProductList/ProductPage/index.js // แสดงสินค้าแบบ page
+
+#31 MERN Stack Project | Ecommerce Website | Flipkart Header Clone - 30
+#32 MERN Stack Project Series | Ecommerce Website | User Login And Product Page - 31
+#33 MERN Stack Project | Ecommerce Website | User Signout and Product Details Page - 32
+npm install react-icons --save
+npm install @redux-devtools/extension --save
+
+user-app/src/components/MaterialUI/index.js  // สร้าง login modal
+user-app/src/components/Header/index.js  // สร้าง Header
+user-app/src/containers/ProductDetail/index.js // สร้าง ProductDetail
+user-app/src/actions/product.actions.js // สร้าง getProductById
+ีuser-app/src/reducers/product.reducers.js // เพิ่ม switch type
+
+src/controllers/product.js // สร้าง getProductDetailById
+src/routes/product.js  // สร้าง route '/product-detail/:productId'
+
+
+#34 MERN Stack Project | Ecommerce Website | User Cart Checkout - 33
+
+user-app/src/containers/Cart/index.js // สร้าง Cart
+user-app/src/containers/Cart/CartItem/index.js // สร้าง CartItem
+user-app/src/actions/cart.actions.js  // สร้าง addToCart, getCartItems, updateCart, removeCartItem
+user-app/src/reducers/cart.reducers.js  // สร้าง switch type cart
+
+#35 MERN Stack Project | Ecommerce Website | Increase Cart Quantity
+#36 MERN Stack Project | Ecommerce Website | Loggedin user cart - 35
+
+user-app/src/containers/Cart/index.js // แก้ไขให้เพิ่ม qty 
+user-app/src/containers/Cart/CartItem/index.js // แก้ไขให้เพิ่ม qty
+
+
+user-app/src/actions/cart.actions.js // สร้าง updateCart ขณะยังไม่ login จะดึงข้อมูล cartItems จาก localStorage หาก login จะดึงข้อมูล cartItems จากฐานข้อมูล cart
+user-app/src/App.js // ให้ updateCart เมื่อมีการ login หรือ logout (มีการเปลี่ยนแปลง auth.authenticate)
+useEffect(() => {
+    dispatch(updateCart());
+}, [auth.authenticate]);
+
+
+#37 MERN Stack Project | Ecommerce Website | Place Order Checkout - 36
+#38 MERN Stack Project | Ecommerce Website | Place Order - 37
+#39 MERN Stack Project | Ecommerce Website | Place Order - 38
+#40 MERN Stack Project | Ecommerce Website | Order Summary - 39
+#41 MERN Stack Project | Ecommerce Website | Add Order - 40  
+#42 MERN Stack Project | Ecommerce Website | Orders Page - 41
+
+src/models/address.js // ตารางข้อมูลจัดเก็บที่อยู่จัดส่ง
+src/controllers/address.js // addAddress, getAddress
+src/routes/address.js // route 
+
+user-app/src/actions/user.actions.js // addAddress, getAddress
+user-app/src/reducers/user.reducers.js // สร้าง type สำหรับ state
+user-app/src/containers/Checkout/index.js // สร้าง page Checkout
+user-app/src/containers/Checkout/Addressform.js // สร้างส่วน Addressform
+
+user-app/src/App.js // สร้าง react route "/checkout"
+
+
+#43 MERN Stack Project | Ecommerce Website | Clothing Page - 42
+
+user-app/src/containers/ProductList/index.js  // switch default ไปที่ ClothingAndAccessories
+user-app/src/containers/ProductList/ClothingAndAccessories/index.js // สร้าง page ClothingAndAccessories
+user-app/src/containers/ProductList/ClothingAndAccessories/style.css // สร้าง style sheet
+
+#44 MERN Stack Project | Ecommerce Website | Password Fix & Track Orders - 43
+#45 MERN Stack Project | Ecommerce Website | Admin Orders handling - 44
+
+src/controllers/admin/order.js  // สร้างฟังก์ชั่น updateOrder, getCustomerOrders
+src/routes/admin/order.js  // สร้าง route "/order/update" , "/order/getCustomerOrders"
+src/index.server.js  // add,use orderAdminRoutes
+
+admin-app/src/containers/Orders // สร้าง page Orders
+admin-app/src/App.js // สร้าง route "/orders"
+admin-app/src/actions/order.actions.js  // สร้างฟังก์ชั่น updateOrder, getCustomerOrders
+admin-app/src/reducers/state.reducers.js  // สร้างส่วน orderReducer
+
+#46 MERN Stack Project | Ecommerce Website | Admin Order Status update - 45
+
+admin-app/src/containers/Orders  // เพิ่มเติมส่วน update status
+
+#47 MERN Stack Project | Ecommerce Website | Remove Cart Items - 46
+
+user-app/src/containers/Cart/index.js // สร้างส่วน remove cart
+user-app/src/actions/cart.actions.js // สร้างฟังก์ชั่น removeCartItem
+user-app/src/reducers/cart.reducers.js  // เพิ่ม switch type REMOVE_CART_ITEM_REQUEST, REMOVE_CART_ITEM_SUCCESS, REMOVE_CART_ITEM_FAILURE
+
+#48 
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+npm install redux react-redux redux-thunk --save
+
+มีโฟลเดอร์ actions, reducers, store เพื่อการส่งข้อมูลระหว่างเพจ
+actions คำนวนและส่งสถานะระหว่างเพจ
+reducers ตรวจสอบสถานะและส่งข้อมูลเข้า store
+store เก็บข้อมูล getState
+
+public/index.html ไฟล์เริ่มต้น กำหนดส่วน link css, script, element root 
+index.js ไฟล์ run กำหนดส่วนเชื่อมต่อกับ root ใน html และเรียก app.js
+index.css ไฟล์ css default
+app.js  แสดง route และเชื่อมโยงไปยัง containers ต่างๆ
+containers/  redux แสดง หน้าเพจใดเพจหนึ่ง,
+components/  redux แสดง อิลิเมนต์ใดอิลิเมนต์หนึ่ง
+-กำหนด state, 
+-อ้างถึง state จาก reducers, 
+-ใช้ useDispatch เพื่อเรียก action
+-ใช้ useEffect เพื่อ เมื่อมีการเปลี่ยนแปลง หรืออัปเดรจ ให้เรียกคำสั่ง เช่น ตรวจสอบสถานะผ่าน action
+-กำหนด function เมื่อมี event ใดๆเช่นคลิกปุ่ม เพื่อเรียก action เพื่อส่งข้อมูลฟอร์ม หรือดำเนินการใดๆ,
+-เรียกใช้ hook ?????
+
+
+
+
+
