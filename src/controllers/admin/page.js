@@ -15,7 +15,7 @@ exports.createPage = function(req, res, next) {
     }else if(req.files.banners.length > 0) {
         const {banners: bannersFile} = req.files;
         req.body.banners = bannersFile.map((banner, index) => ({
-            img: `/public/${banner.filename}`,
+            img: `${process.env.APP}/public/${banner.filename}`,
             navigateTo: `/bannerClicked?categoryId=${req.body.categoryId}&type=${req.body.type}`
         }));
     }
@@ -25,7 +25,7 @@ exports.createPage = function(req, res, next) {
     }else if(req.files.products.length > 0) {
         const {products: productsFile} = req.files;
         req.body.products = productsFile.map((product, index) => ({
-            img: `/public/${product.filename}`,
+            img: `${process.env.APP}/public/${product.filename}`,
             navigateTo: `/productClicked?categoryId=${req.body.categoryId}&type=${req.body.type}`
         }));
     }

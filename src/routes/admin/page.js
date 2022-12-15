@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { createPage, getPage } = require('../../controllers/admin/page');
+const { createPage, getPage } = require('../../controllers/admin/page.deploy');
 const {requireSignin, upload, adminMiddleware} = require('../../common-middleware');
 const { validateSignupRequest, validateSigninRequest, isRequestValidated } = require('../../validators/auth');
 

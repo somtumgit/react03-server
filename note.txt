@@ -370,10 +370,33 @@ user-app/src/containers/Cart/index.js // สร้างส่วน remove cart
 user-app/src/actions/cart.actions.js // สร้างฟังก์ชั่น removeCartItem
 user-app/src/reducers/cart.reducers.js  // เพิ่ม switch type REMOVE_CART_ITEM_REQUEST, REMOVE_CART_ITEM_SUCCESS, REMOVE_CART_ITEM_FAILURE
 
-#48 
 
 
+#48 MERN Stack Project | Ecommerce Website | Deployment on Heroku - 47
+https://github.com/mars/create-react-app-buildpack.git
+heroku create --remote heroku-20 --stack heroku-20 reacttest03-admin-app-heroku-20
 
+
+src/package.json 
+"scripts": {
+    "start": "node ./src/index.server.js"
+},
+
+src/.gitignore // แก้ไข
+
+src/controllers/admin/page.js  // แก้ไข process.env.APP ออก
+
+deploy backend ขึ้น git แล้ว deploy จาก git ไปที่ heroku 
+กำหนด Config Vars ตาม .env
+กำหนด buildpack เป็น nodejs
+
+deploy admin-app ขึ้น git แล้ว deploy จาก git ไปที่ heroku
+heroku create --remote heroku-20 --stack heroku-20 reacttest03-admin-app-heroku-20  //กำหนด app ให้ใช้ stack heroku-20 สำหรับ react
+กำหนด buildpack เป็น https://github.com/mars/create-react-app-buildpack.git
+
+deploy user-app ขึ้น git แล้ว deploy จาก git ไปที่ heroku
+heroku create --remote heroku-20 --stack heroku-20 reacttest03-user-heroku-20
+กำหนด buildpack เป็น https://github.com/mars/create-react-app-buildpack.git
 
 
 
